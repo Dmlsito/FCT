@@ -1,11 +1,12 @@
 // Publisher -> manda la informacion
 const mqtt = require('mqtt')
-const serialport = require('serialport')
-const port = new serialport('COM1', {
-    baudRate: 9600
+var SerialPort = require('serialport')
+
+const port = new SerialPort('COM5', {
+    baudRate: 9600,
 })
 // Parser //
-const parser = port.pipe(new serialport.parsers.Readline({delimiter: '\n'}))
+const parser = port.pipe(new SerialPort.parsers.Readline({delimiter: '\n'}))
 const pub = mqtt.connect('mqtt://localhost:9000')
 
 pub.on('connect', () => {
@@ -14,3 +15,4 @@ pub.on('connect', () => {
         pub.publish('topic test', data)
     })
 })
+
