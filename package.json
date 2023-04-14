@@ -1,0 +1,32 @@
+{
+  "name": "fct",
+  "version": "1.0.0",
+  "description": "PROYECTO\r Lenguajes que tendremos que utilizar\r C++\r Node.js\r Javascript\r React\r HTML, CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dmlsito/FCT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dmlsito/FCT/issues"
+  },
+  "homepage": "https://github.com/Dmlsito/FCT#readme",
+  "dependencies": {
+    "jsonschema": "^1.2.6",
+    "mosca": "^2.8.3",
+    "mqtt": "^4.3.7",
+    "serialport": "^10.5.0"
+  },
+  "devDependencies": {
+    "standard": "^17.0.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
+}
