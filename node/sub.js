@@ -24,19 +24,12 @@ sub.on('connect', () => {
 sub.on('message', (topic, message) => {
     let pressureNumber = parseInt(message)
     let state;
-   
-    const date = new Date();
-    
-    if(pressureNumber >= 50) {
+    const date = new Date(); 
+    if(pressureNumber >= 70) {
     state = 1;
-    db.query('insert into machine_state set ? ',
-    {state: 1},
-   
-    (err, rows) => {
-    if(err){
-        console.log(err)
-    }
-    });
+    DB.query(`UPDATE machine_state SET state = ${1} WHERE id = 18`);
+    } else {
+    DB.query(`UPDATE machine_state SET state = ${0} WHERE id = 18`);
 }
 })
 //19: 31
