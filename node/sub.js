@@ -1,15 +1,16 @@
 // Se subscribe a la informacion del publisher //
 const mqtt = require('mqtt')
 const mysql = require('mysql')
-const db = mysql.createConnection({
-    host: 'localhost',
-    port: 3307,
-    user: 'root',
-    password: 'instiagra',
-    database: 'fct'
+const DB = mysql.createConnection({
+    host: 'db4free.net',
+    port: 3306,
+    user: 'dmlsito14',
+    password: 'Instiagra14',
+    database: 'fctprueba'
 })
+//dmlsito14, Instiagra14
 //Evento que se dencadenara cuando se conecte a la DDBB
-db.connect(() => {
+DB.connect(() => {
     console.log('Database okey')
 })
 
@@ -21,25 +22,21 @@ sub.on('connect', () => {
 })
 
 sub.on('message', (topic, message) => {
-    
     let pressureNumber = parseInt(message)
     let state;
+   
     const date = new Date();
-    if(pressureNumber >= 10) 
+    
+    if(pressureNumber >= 50) {
     state = 1;
-    else
-    state = 0
-    
-        db.query('insert into machine_state set ? ?',
-        { data: state },
-        { data: date },
-        (err, rows) )
-
-        console.log('data insertada')
-        
-    
-    
-
-
+    db.query('insert into machine_state set ? ',
+    {state: 1},
+   
+    (err, rows) => {
+    if(err){
+        console.log(err)
+    }
+    });
+}
 })
 //19: 31
