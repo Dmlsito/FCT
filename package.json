@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Dmlsito/FCT/issues"
   },
-  "homepage": "https://github.com/Dmlsito/FCT#readme"
+  "homepage": "https://github.com/Dmlsito/FCT#readme",
+  "dependencies": {
+    "node": "^19.8.1"
+  }
 }
