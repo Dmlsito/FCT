@@ -1,0 +1,53 @@
+h2 {
+    font-size: 40px;
+    color: #fff;
+}
+.log{
+    box-shadow: 3px 3px  10px #641E16;
+    border-radius: 5px;
+    background-color: #1B2631;
+    padding: 20px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 300px;
+    text-align: center;
+    min-height: 300px;  
+}
+.log-form{
+    margin-top: 40px;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+input {
+    color: #fff;
+    background: #212F3D;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    border-bottom: 2px solid #641E16;
+    text-decoration: none;
+    width: 200px;
+    height: 40px;
+    font-weight: bold;
+}
+input::placeholder{
+    color: #fff;
+}
+button{
+    width: 100px;
+    transition: all 0.9s;
+    border: none;
+    background: #212F3D;
+    height: 40px;
+    border-radius: 5px;
+}
+button:hover{
+    background: #000;
+    cursor: pointer;
+    color: #641E16;
+}
