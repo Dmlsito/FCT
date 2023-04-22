@@ -1,4 +1,5 @@
-// Publisher -> manda la informacion
+// Publisher -> manda la informacion // 
+
 const mqtt = require('mqtt')
 const SerialPort = require('serialport')
 

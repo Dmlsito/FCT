@@ -23,9 +23,10 @@ sub.on('connect', () => {
 
 sub.on('message', (topic, message) => {
   const pressureNumber = parseInt(message)
-
+  console.log(pressureNumber)
   // const date = new Date() //
-  if (pressureNumber >= 70) {
+  if (pressureNumber >= 30) {
+    console.log('presionnn')
     DB.query(`UPDATE machine_state SET state = ${1} WHERE id = 18`)
   } else {
     DB.query(`UPDATE machine_state SET state = ${0} WHERE id = 18`)
