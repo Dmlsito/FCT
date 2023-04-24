@@ -32,16 +32,20 @@ export const Login = () => {
     if (errors) {
       setShowErros(true)
       e.preventDefault()
-    } else setShowErros(false)
+      setUsername('')
+    } else {
+      setShowErros(false)
+      setPassword('')
+    }
   }
 
   return (
     <main className='log'>
       <h2>Wellcome</h2>
       <form className='log-form' action='/main-page'>
-        <input placeholder='Username' onChange={getUsername} onBlur={handleClick} name='name' />
-        <input placeholder='Password' onChange={getPassword} onBlur={handleClick} name='password' />
-        {showErrors && <span>Usuario no valido</span>}
+        <input placeholder='Username' onChange={getUsername} value={username} onBlur={handleClick} name='name' />
+        <input placeholder='Password' onChange={getPassword} value={password} onBlur={handleClick} name='password' />
+        {showErrors && <span>This user doesn't exist</span>}
         <button onClick={handleSubmit}>Sig in</button>
       </form>
     </main>

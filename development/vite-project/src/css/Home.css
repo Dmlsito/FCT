@@ -2,10 +2,10 @@
     display: flex;
     justify-content: space-evenly;
     width: 100vw;
-    
 }
 .home-picture {
     min-width: 1000px;
+   
 }
 .home-picture img {
     margin-top: 40px;
@@ -28,7 +28,6 @@
     align-items: center;
     height: 550px;
 }
-
 .card-body {
     display: flex;
     color: #fff;
