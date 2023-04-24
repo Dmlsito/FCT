@@ -20,6 +20,7 @@ export const Home = () => {
     }
   }
 
+
   return (
     <main className='home'>
       <picture className='home-picture'>
@@ -35,8 +36,8 @@ export const Home = () => {
                   <header className='card-header'>FECHA</header>
                   <article className='card-article'>{
                   state.state === 0
-                    ? `maquina ${state.id}: libre`
-                    : `maquina ${state.id}: en uso`
+                    ? <span className='card-article-text'>maquina {state.id}: <span className='card-article-text-free'> libre</span></span>
+                    : <span className='card-article-text'>maquina {state.id}: <span className='card-article-text-using'> libre</span></span>
                   }
                   </article>
                 </main>

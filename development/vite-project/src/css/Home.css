@@ -49,12 +49,22 @@
     width: 200px;
 }
 
-.table-button {
-    
+.table-button { 
     color: #fff;
     font-size: 30px;
     width: 100px;
     border-bottom: 2px solid #641E16;
-   
-    
+}
+.card-article-text{
+    font-size: 18px;
+    color: #fff;
+    font-weight: 100;
+}
+.card-article-text-free{
+    color: green;
+    font-weight: bold;
+}
+.card-article-text-using{
+    color: #FD6800;
+    font-weight: bold;
 }
