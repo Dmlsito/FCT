@@ -13,8 +13,8 @@ sub.on('message', (topic, message) => {
 
   // const date = new Date() //
   if (pressureNumber >= 70) {
-    pool.query(`UPDATE machine_state SET state = ${1} WHERE id = 18`)
+    pool.query(`UPDATE machine_state SET state = ${1} WHERE id = 17`)
   } else {
-    pool.query(`UPDATE machine_state SET state = ${0} WHERE id = 18`)
+    pool.query(`UPDATE machine_state SET state = ${0} WHERE id = 17`)
   }
 })
