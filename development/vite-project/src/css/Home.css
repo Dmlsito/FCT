@@ -2,13 +2,12 @@
     display: flex;
     justify-content: space-evenly;
     width: 100vw;
-    
 }
 .home-picture {
-    
     min-width: 1000px;
 }
 .home-picture img {
+    margin-top: 40px;
     width: 1000px;
     height: 500px;
     min-width: 1000px;

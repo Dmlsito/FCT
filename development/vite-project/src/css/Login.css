@@ -34,20 +34,31 @@ input {
     width: 200px;
     height: 40px;
     font-weight: bold;
+    outline: none;
+   
 }
+
 input::placeholder{
     color: #fff;
 }
 button{
+    color: #fff;
     width: 100px;
     transition: all 0.9s;
     border: none;
     background: #212F3D;
     height: 40px;
     border-radius: 5px;
+    font-weight: bold;
+    border-bottom: 2px solid #641E16;
 }
 button:hover{
     background: #000;
     cursor: pointer;
     color: #641E16;
+}
+
+span {
+    color: #FD6800;
+    font-weight: bold
 }

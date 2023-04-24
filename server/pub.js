@@ -2,9 +2,7 @@
 
 const mqtt = require('mqtt')
 const SerialPort = require('serialport')
-
-const port = new SerialPort('COM5', {
-  baudRate: 9600
+   baudRate: 9600
 })
 // Parser //
 const parser = port.pipe(new SerialPort.parsers.Readline({ delimiter: '\n' }))
