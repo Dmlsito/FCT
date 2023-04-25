@@ -14,6 +14,7 @@ export const Clock = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      // Cada vez que querramos acceder a una referencua tendremos que acceder a la propiedad current del elemento
       span.current.innerHTML = `${time()}`
     }, 1000)
     return () => clearInterval(interval)

@@ -16,11 +16,10 @@
   display: flex;
   gap: 350px;
   align-items: center;
+  justify-content: space-evenly;
   
 }
-.App-head-clock{
-  margin-left: 20px;
-}
+
 .App-head-title{
   font-size: 50px;
 }
@@ -29,4 +28,9 @@
 }
 .App-head-list li {
   list-style: none;
+}
+
+.App-head-list li {
+  margin-top: 10px;
+  opacity: .5;
 }

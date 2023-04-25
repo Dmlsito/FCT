@@ -1,9 +1,10 @@
 import '../css/Home.css'
 import { useState, useEffect } from 'react'
-
+import { TableState } from './TableState'
 export const Home = () => {
   const [stateMachine, setStateMachine] = useState([''])
   const [indexStart, setIndexStart] = useState(0)
+
   const getData = async () => {
     // Take the data //
     const data = await fetch('http://localhost:8080/main-page')
@@ -26,27 +27,8 @@ export const Home = () => {
         <img src='../images/pngDani.png' />
       </picture>
       <article>
-        <div className='table'>
-          <h3>Machine status</h3>
-          {
-            stateMachine.splice(indexStart, 6).map((state) => {
-              return (
-                <main className='card-body' key={state.id}>
-                  <header className='card-header'>FECHA</header>
-                  <article className='card-article'>{
-                  state.state === 0
-                    ? <span className='card-article-text'>maquina {state.id}: <span className='card-article-text-free'> libre</span></span>
-                    : <span className='card-article-text'>maquina {state.id}: <span className='card-article-text-using'> libre</span></span>
-                  }
-                  </article>
-                </main>
-              )
-            })
-          }
-          <button className='table-button' onClick={handleClick}>+</button>
-        </div>
+        <TableState stateMachine={stateMachine} indexStart={indexStart} handleClick={handleClick} />
       </article>
-
     </main>
   )
 }

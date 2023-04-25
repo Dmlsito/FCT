@@ -10,6 +10,10 @@ const App = () => {
       <div className='App-head'>
         <span className='App-head-clock'><Clock /></span>
         <h1 className='App-head-title'>Wolfson manufacturing workshop</h1>
+        <ul className='App-head-list'>
+          <li>wolfsonManufacturing@gmail.com</li>
+          <li>698-444-333</li>
+        </ul>
       </div>
       <Routes>
         <Route path='/' element={<Entry />} />
