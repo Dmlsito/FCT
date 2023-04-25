@@ -5,7 +5,7 @@ export const CardState = ({ state }) => {
       <article className='card-article'>{
           state.state === 0
             ? <span className='card-article-text'>maquina {state.id}: <span className='card-article-text-free'> libre</span></span>
-            : <span className='card-article-text'>maquina {state.id}: <span className='card-article-text-using'> libre</span></span>
+            : <span className='card-article-text'>maquina {state.id}: <span className='card-article-text-using'> en uso</span></span>
           }
       </article>
     </main>

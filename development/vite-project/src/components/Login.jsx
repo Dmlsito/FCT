@@ -22,20 +22,18 @@ export const Login = () => {
       body: JSON.stringify(objectUser)
     }).then(res => res.json())
 
-    console.log(errs.error)
-
     if (errs.error) setErrors(true)
     else if (!errs.error) setErrors(false)
   }
 
   const handleSubmit = e => {
     if (errors) {
+      setUsername('')
+      setPassword('')
       e.preventDefault()
       setShowErros(true)
-      setUsername('')
     } else {
       setShowErros(false)
-      setPassword('')
     }
   }
 

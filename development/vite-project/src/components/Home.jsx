@@ -1,18 +1,15 @@
 import '../css/Home.css'
 import { useState, useEffect } from 'react'
 import { TableState } from './TableState'
+
 export const Home = () => {
   const [stateMachine, setStateMachine] = useState([''])
   const [indexStart, setIndexStart] = useState(0)
 
-  const getData = async () => {
-    // Take the data //
-    const data = await fetch('http://localhost:8080/main-page')
-      .then(res => res.json())
-    setStateMachine(data)
-  }
   useEffect(() => {
-    getData()
+    fetch('http://localhost:8080/main-page')
+      .then(res => res.json())
+      .then(res => setStateMachine(res))
   }, [indexStart])
 
   const handleClick = () => {
