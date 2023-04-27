@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import '../css/Entry.css'
+import '../css/Header.css'
 export const Entry = () => {
   return (
     <main className='entry'>

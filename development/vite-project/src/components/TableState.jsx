@@ -1,6 +1,8 @@
 import { CardState } from './CardState'
+import { useStateMachine } from '../hooks/getStateMachine'
 
-export const TableState = ({ stateMachine, indexStart, handleClick }) => {
+export const TableState = ({ indexStart, handleClick }) => {
+  const stateMachine = useStateMachine({ indexStart })
   return (
     <div className='table'>
       <h3>Machine status</h3>
@@ -11,7 +13,7 @@ export const TableState = ({ stateMachine, indexStart, handleClick }) => {
             )
           })
         }
-      <button className='table-button' onClick={handleClick}>+</button>
+      <button className='button table-button ' onClick={handleClick}>+</button>
     </div>
   )
 }
