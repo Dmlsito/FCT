@@ -8,9 +8,9 @@ import { Header } from './Header'
 const App = () => {
   return (
     <div className='App'>
-      <Header className='App-headerComponent' />
+      <Header />
       <Routes>
-        <Route path='/' element={<Entry className='App-homeComponent' />} />
+        <Route path='/' element={<Entry/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/main-page' element={<Home />} />
       </Routes>
