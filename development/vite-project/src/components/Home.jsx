@@ -14,7 +14,7 @@ export const Home = () => {
       <picture className='home-picture'>
         <img src='../images/pngDani.png' />
       </picture>
-      <article>
+      <article className='home-article'>
         <TableState indexStart={indexStart} handleClick={handleClick} />
       </article>
     </main>

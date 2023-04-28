@@ -1,24 +1,17 @@
 .App {
-  height: 100vh;
-  width: 100vw;
-  margin-top: 0;
-  display: grid;
-  place-content: center;
-  /*background: linear-gradient(0deg, rgba(0,0,0,1) 8%, rgba(25,25,25,1) 100%);*/
-  background: #ccc;
+  
+  display: flex;
+  flex-direction: column;
+
 }
 .App-head {
   color: #fff;
-  position: absolute;
-  width: 100vw;
   height: 100px;
   background-color: #212F3D;
-  box-shadow: 3px 3px  10px #641E16;
+  border-bottom: 3px solid #641E16;
   display: flex;
-  gap: 350px;
   align-items: center;
   justify-content: space-evenly;
-  
 }
 .App-head-title{
   opacity: .5;
@@ -36,3 +29,4 @@
 .App-head-list-i {
   margin-right: 5px;
 }
+
