@@ -2,4 +2,11 @@
     color: #fff;
     opacity: .5;
     font-size: 60px;
+    background: none;
+}
+
+@media screen and (max-width: 1500px){
+    .clock{
+        font-size: 40px;;
+    }
 }
