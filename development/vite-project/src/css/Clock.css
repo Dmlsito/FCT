@@ -7,6 +7,13 @@
 
 @media screen and (max-width: 1500px){
     .clock{
-        font-size: 40px;;
+        font-size: 40px;
     }
+}
+
+@media screen and (max-width: 600px){
+    .clock{
+        font-size: 15px;
+    }
+
 }

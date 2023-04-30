@@ -44,14 +44,16 @@ export const Login = () => {
   }
 
   return (
-    <main className='log'>
-      <h2>Wellcome</h2>
-      <form className='log-form' action='/main-page' onSubmit={handleSubmit}>
-        <input placeholder='Username' onChange={getUsername} value={username} onBlur={handleBlur} name='name' />
-        <input placeholder='Password' onChange={getPassword} value={password} onBlur={handleBlur} name='password' />
-        {showErrors && <span>This user doesn't exist</span>}
-        <button type='submit' className='button'>Sig in</button>
-      </form>
+    <main className='main'>
+      <div className='main-log'>
+        <h2>Wellcome</h2>
+        <form className='log-form' action='/main-page' onSubmit={handleSubmit}>
+          <input placeholder='Username' onChange={getUsername} value={username} onBlur={handleBlur} name='name' />
+          <input placeholder='Password' onChange={getPassword} value={password} onBlur={handleBlur} name='password' />
+          {showErrors && <span>This user doesn't exist</span>}
+          <button type='submit' className='button'>Sig in</button>
+        </form>
+      </div>
     </main>
   )
 }

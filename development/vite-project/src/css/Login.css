@@ -1,8 +1,15 @@
 h2 {
+    background: none;
     font-size: 40px;
     color: #fff;
 }
-.log{
+.main{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-log{
     box-shadow: 3px 3px  10px #641E16;
     border-radius: 5px;
     background-color: #1B2631;
@@ -16,6 +23,7 @@ h2 {
     min-height: 300px;  
 }
 .log-form{
+    background: none;
     margin-top: 40px;
     gap: 20px;
     display: flex;

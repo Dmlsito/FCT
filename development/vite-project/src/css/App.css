@@ -1,21 +1,21 @@
 .App {
-  flex-grow: 1;
+  border: 3px solid orange;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
 }
 .App-head {
-  min-width: 900px;
+  margin-top: 0;
   color: #fff;
   height: 100px;
   background-color: #212F3D;
   border-bottom: 3px solid #641E16;
   display: flex;
-  gap: 10px;
   align-items: center;
   justify-content: space-evenly;
 }
 .App-head-title{
+  text-align: center;
   background: none;
   opacity: .5;
   font-size: 45px;
@@ -26,21 +26,19 @@
   margin-top: 10px;
   opacity: .5;
   width: 260px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .App-head-list-i {
   margin-right: 5px;
   background: none;
 }
 .App-head-list{
+  
   background: none;
 }
 .App-head-clock{
   background: none;
 }
-
+/*
 @media screen and (max-width: 1500px){
   .App-head-title{
     font-size: 25px;
@@ -50,3 +48,25 @@
     font-size: 20px;
   }
 }
+@media screen and (max-width: 900px){
+  .App-head-list li{
+    font-size: 10px;
+  }
+
+}
+@media screen and (max-width: 500px){
+  
+  .App-head-list{
+    text-align: center;
+    width: 30px;
+    font-size: 10px;
+  }
+  .App-head-title{
+    width: 200px;
+    font-size: 10px;
+  }
+  .App-head{
+    gap: 5px;
+  }
+}
+*/
