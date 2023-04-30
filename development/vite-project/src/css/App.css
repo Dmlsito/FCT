@@ -1,13 +1,11 @@
 .App {
-  border: 3px solid orange;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 .App-head {
-  margin-top: 0;
   color: #fff;
-  height: 100px;
   background-color: #212F3D;
   border-bottom: 3px solid #641E16;
   display: flex;
@@ -25,7 +23,7 @@
   list-style: none;
   margin-top: 10px;
   opacity: .5;
-  width: 260px;
+  
 }
 .App-head-list-i {
   margin-right: 5px;
