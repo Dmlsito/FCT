@@ -15,5 +15,3 @@ export const CardState = ({ state }) => {
     </main>
   )
 }
-
-// `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}/${date.getUTCHours()}:${date.getMinutes()}:${date.getSeconds()}` //
