@@ -1,5 +1,6 @@
 import '../css/Login.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Form } from './Form'
 export const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -10,11 +11,9 @@ export const Login = () => {
 
   const getPassword = e => setPassword(e.target.value)
 
-  const validation = async () => {
-    let error
+  const validation = async ({ username, password }) => {
     const objectUser = { name: username, password }
-
-    const errs = await fetch('http://localhost:8080/login', {
+    const { error } = await fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -22,44 +21,28 @@ export const Login = () => {
       body: JSON.stringify(objectUser)
     }).then(res => res.json())
 
-    if (errs.error) error = true
-    else if (!errs.error) error = false
-
-    return error
+    setErrors(error)
   }
 
-  const handleBlur = async () => {
-    validation().then(res => setErrors(res))
-  }
-
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     if (errors) {
+      e.preventDefault()
       setUsername('')
       setPassword('')
-      e.preventDefault()
       setShowErros(true)
     } else {
       setShowErros(false)
     }
   }
 
+  useEffect(() => {
+    validation({ username, password })
+  }, [username, password])
+
   return (
-    <main className='log'>
-      <h2>Wellcome</h2>
-      <form className='log-form' action='/main-page' onSubmit={handleSubmit}>
-        <input placeholder='Username' onChange={getUsername} value={username} onBlur={handleBlur} name='name' />
-        <input placeholder='Password' onChange={getPassword} value={password} onBlur={handleBlur} name='password' />
-        {showErrors && <span>This user doesn't exist</span>}
-        <button type='submit' className='button'>Sig in</button>
-      </form>
-    </main>
+    <Form
+      handleSubmit={handleSubmit} getPassword={getPassword}
+      getUsername={getUsername} password={password} username={username} showErrors={showErrors}
+    />
   )
 }
-
-/*
-Otra forma de poder recoger los valores de los inputs del formulario seria la siguiente
-cosnt fields = new window.FormData(event.target)
-// Ponemos name porque en este caso recuperamos el valor del input name, pero podriamos reuperar tambien el valor del campo password
-cosnt query = fields.get('name')
-
- */
