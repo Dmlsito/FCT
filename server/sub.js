@@ -23,13 +23,34 @@ sub.on('connect', () => {
 
 sub.on('message', (topic, message) => {
   const pressureNumber = parseInt(message)
-  console.log(pressureNumber)
+  const dateNow = Date.now()
+  const dateUsed = new Date(dateNow)
+  const final = dateUsed.toISOString()
   // const date = new Date() //
+
   if (pressureNumber >= 30) {
     console.log('presionnn')
-    DB.query(`UPDATE machine_state SET state = ${1} WHERE id = 18`)
+    DB.query(`UPDATE machine_state SET state = ?, LastTimeUsed = ? WHERE id = 17`, [1, final])
   } else {
-    DB.query(`UPDATE machine_state SET state = ${0} WHERE id = 18`)
+    DB.query(`UPDATE machine_state SET state = ${0} WHERE id = 17`)
+
+  if (pressureNumber >= 10) {
+    setTimeout(() => {
+      if(pressureNumber >= 20){
+        console.log('Han pasado los 10 segundos y sigue habiendo presion')
+        DB.query(`UPDATE machine_state SET state = ${1} WHERE id = 17`)
+      }
+    }, 20000)
+    
+  } 
+  else {
+    setTimeout(() => {
+      if(pressureNumber < 20){
+        console.log('Han pasado dos minutos y no ha habido ninguna actividad')
+        DB.query(`UPDATE machine_state SET state = ${0} WHERE id = 17`)
+      }
+    }, 120000)
+
   }
-})
+}})
 // 19: 31
