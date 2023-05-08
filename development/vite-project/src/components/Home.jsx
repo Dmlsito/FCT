@@ -1,6 +1,11 @@
 import '../css/Home.css'
 import { useState } from 'react'
 import { TableState } from './TableState'
+import { io } from 'socket.io-client'
+
+// Conectamos el front con el back, como hicimos con el back // 
+const SOCKET = io.connect('http://localhost:8080')
+
 export const Home = () => {
   const [indexStart, setIndexStart] = useState(0)
   const handleClick = () => {

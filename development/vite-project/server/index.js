@@ -1,8 +1,17 @@
 
 import express from 'express'
 import pool from './db.js'
+import http from 'http'
+import { Server } from 'socket.io'
 
 const app = express()
+const server = http.createServer(app)
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST']
+  }
+})
 
 // Desactivamos los cors con esto //
 app.use((req, res, next) => {
@@ -15,8 +24,15 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 
-app.listen(8080, () => {
+server.listen(8080, () => {
   console.log(`server on port ${8080}`)
+})
+
+io.on('connection', (socket) => {
+  console.log('usuario conectado al socket', socket.id)
+  socket.on('disconnect', () => {
+    console.log('User disconnected', socket.id)
+  })
 })
 
 app.post('/login', async (request, response) => {
@@ -32,6 +48,7 @@ app.post('/login', async (request, response) => {
   } else {
     // Si existe le mandamos un json vacio
     console.log('Si que existe este usuario')
+
     response.json({ error: false })
   }
 })
@@ -47,3 +64,7 @@ app.get('/main-page', async (request, response) => {
     response.json(rows).status(200)
   }
 })
+
+// Datos para el chat //
+// Project ID -> ea5ad5a0-17a7-491d-a0e9-5af3c163e437 //
+// Private Key -> 91194d0c-e20d-4173-9ee9-4a994a058e60 //
