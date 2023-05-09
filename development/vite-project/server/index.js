@@ -28,12 +28,19 @@ server.listen(8080, () => {
   console.log(`server on port ${8080}`)
 })
 
+/*
 io.on('connection', (socket) => {
   console.log('usuario conectado al socket', socket.id)
+
+  socket.on('join_room', (data) => {
+    socket.join(data)
+    console.log(`User with the ID ${socket.id} joined room: ${data}`)
+  })
   socket.on('disconnect', () => {
     console.log('User disconnected', socket.id)
   })
 })
+*/
 
 app.post('/login', async (request, response) => {
   console.log('Alguien se esta logeando')

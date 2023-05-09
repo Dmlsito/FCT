@@ -49,7 +49,7 @@ input {
 input::placeholder{
     color: #fff;
 }
-.button {
+button {
     color: #fff;
     width: 100px;
     transition: all 0.9s;
@@ -60,7 +60,7 @@ input::placeholder{
     font-weight: bold;
     border-bottom: 2px solid #641E16;
 }
-.button:hover{
+button:hover{
     background: #000;
     cursor: pointer;
     color: #641E16;
