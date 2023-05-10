@@ -3,6 +3,7 @@ import '../css/Chat.css'
 import { BsFillSendFill } from 'react-icons/bs'
 export const Chat = ({ socket, username, room }) => {
   const [currentMessage, setCurrentMessage] = useState('')
+  const [ receiveMessage, setReceiveMessage] = useState('')
   const handleChange = e => {
     setCurrentMessage(e.target.value)
   }
