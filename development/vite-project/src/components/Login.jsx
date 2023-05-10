@@ -1,10 +1,6 @@
 import '../css/Login.css'
 import { useState, useEffect } from 'react'
 import { Form } from './Form'
-import { io } from 'socket.io-client'
-
-// Conectamos el front con el back, como hicimos con el back //
-const SOCKET = io.connect('http://localhost:8080')
 
 export const Login = () => {
   const [username, setUsername] = useState('')

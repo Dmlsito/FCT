@@ -28,7 +28,7 @@ server.listen(8080, () => {
   console.log(`server on port ${8080}`)
 })
 
-/*
+// Socket.io //
 io.on('connection', (socket) => {
   console.log('usuario conectado al socket', socket.id)
 
@@ -36,11 +36,17 @@ io.on('connection', (socket) => {
     socket.join(data)
     console.log(`User with the ID ${socket.id} joined room: ${data}`)
   })
+
+  socket.on('send_message', (data) => {
+    // Cuando se envie un mensaje el socket va a enviar el mensaje de vuelta, pero le tenemos que
+    // especificar el id de la sala
+    console.log(data.room)
+    socket.to(data.room).emit('receive_message', data)
+  })
   socket.on('disconnect', () => {
     console.log('User disconnected', socket.id)
   })
 })
-*/
 
 app.post('/login', async (request, response) => {
   console.log('Alguien se esta logeando')

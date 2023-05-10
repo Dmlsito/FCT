@@ -4,9 +4,16 @@ import { useState } from 'react'
 import { TableState } from './TableState'
 import { FaRegCommentDots } from 'react-icons/fa'
 import { Chat } from './Chat'
+import { HiOutlineReply } from 'react-icons/hi'
+import { io } from 'socket.io-client'
+
+// Conectamos el front con el back, como hicimos con el back //
+const SOCKET = io.connect('http://localhost:8080')
 
 export const Home = () => {
   const [indexStart, setIndexStart] = useState(0)
+  const [chatUsername, setChatUsername] = useState('')
+  const [room, setRoom] = useState('')
   const [chatLoginAppeared, setChatLoginAppeared] = useState(false)
   const [chatAppeared, setChatAppeared] = useState(false)
   const [click, setClick] = useState(false)
@@ -23,15 +30,20 @@ export const Home = () => {
     if (chatAppeared) return
     setChatLoginAppeared(!chatLoginAppeared)
   }
-
+  console.log(room)
   const handleClickChat = e => {
     setChatLoginAppeared(!chatLoginAppeared)
     setChatAppeared(!chatAppeared)
+    if (chatUsername !== null && room !== null) {
+      SOCKET.emit('join_room', room)
+    }
   }
   const goOutChat = () => {
     setChatAppeared(false)
     setChatLoginAppeared(true)
   }
+  const handleChangeRoom = e => setRoom(e.target.value)
+  const handleChangeUser = e => setChatUsername(e.target.value)
   return (
     <main className='home'>
       <div className='home-main'>
@@ -43,13 +55,13 @@ export const Home = () => {
         </article>
         {chatLoginAppeared &&
           <aside className='home-chatLogin'>
-            <input placeholder='username' name='chatUsername' />
-            <input placeholder='room id' name='chatRoomName' />
+            <input placeholder='username' name='chatUsername' value={chatUsername} onChange={handleChangeUser} />
+            <input placeholder='room id' name='chatRoomName' value={room} onChange={handleChangeRoom} />
             <button onClick={handleClickChat}>Create room</button>
           </aside>}
         <aside className={classNameChat}>
-          <button onClick={goOutChat}>Irse</button>
-          <Chat />
+          <button onClick={goOutChat} className='home-chat-button'><HiOutlineReply /></button>
+          <Chat socket={SOCKET} username={chatUsername} room={room} />
         </aside>
       </div>
       <div className='home-aside'>

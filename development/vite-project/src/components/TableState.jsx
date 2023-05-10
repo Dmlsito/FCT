@@ -6,7 +6,6 @@ export const TableState = ({ indexStart, handleClick, click }) => {
   const stateMachine = useStateMachine({ indexStart })
   // Solo queremos que se muestren los siguientes datos cuando le demos click
   const showInfoState = useMemo(() => {
-    console.log(stateMachine)
     return stateMachine.splice(indexStart, 6)
   }, [click])
 

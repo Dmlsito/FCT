@@ -7,7 +7,6 @@ export const useStateMachine = ({ indexStart }) => {
     fetch('http://localhost:8080/main-page')
       .then(res => res.json())
       .then(res => {
-        console.log(res)
         setStateMachine(res)
       })
   }, [indexStart])

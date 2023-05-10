@@ -1,0 +1,28 @@
+.chat-main {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.chat-main-header {
+    padding-top: 10px;
+    text-align: center;
+    height: 30px;
+    background: #212F3D;
+    color: #fff;
+}
+.chat-main-body {
+    background: #1B2631;
+    flex-grow: 1;
+}
+.chat-main-footer {
+    display: flex;
+}
+.chat-main-footer-button {
+    height: 45px;
+    border-radius: 0px;
+}
+.chat-main-footer input {
+    height: 33px;
+    border-radius: 0px;
+}
