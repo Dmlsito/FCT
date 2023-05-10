@@ -23,7 +23,7 @@ export const Chat = ({ socket, username, room }) => {
   }
   useEffect(() => {
     socket.on('receive_message', (data) => {
-     setReceiveMessage((list) => [...list, data])
+      setReceiveMessage((list) => [...list, data])
     })
   }, [socket])
   return (
