@@ -12,8 +12,13 @@
     color: #fff;
 }
 .chat-main-body {
+    padding: 10px;
     background: #1B2631;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
 }
 .chat-main-footer {
     display: flex;
@@ -25,4 +30,56 @@
 .chat-main-footer input {
     height: 33px;
     border-radius: 0px;
+}
+.chat-main-body-scroll {
+    display: flex;
+    flex-grow: 1;
+    overflow-y:scroll ;
+    overflow-x: hidden;
+}
+
+#you.message {
+    align-self: end;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#other.message {
+    align-self: start;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    flex-direction: column;
+    gap: 5px;
+}
+#you.message .message-header {
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    background: #1063A0;
+    display: flex;
+    max-width: 200px;   
+}
+
+#you.message .message-meta {
+    color: #fff;
+    align-self: end;
+    display: flex;
+    gap: 2px;
+}
+#other.message .message-header {
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    background: #8DC2E8 ;
+    display: flex;
+    max-width: 200px;
+}
+#other.message .message-meta {
+    color: #fff;
+    align-self: start;
+    display: flex;
+    gap: 2px;
 }

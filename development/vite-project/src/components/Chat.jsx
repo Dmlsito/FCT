@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-key */
 import { useState, useEffect } from 'react'
 import '../css/Chat.css'
 import { BsFillSendFill } from 'react-icons/bs'
+import ScrollToBottom from 'react-scroll-to-bottom'
+
 export const Chat = ({ socket, username, room }) => {
   const [currentMessage, setCurrentMessage] = useState('')
   const [receiveMessage, setReceiveMessage] = useState([])
@@ -11,13 +14,15 @@ export const Chat = ({ socket, username, room }) => {
     if (currentMessage !== '') {
       // Creamos un objeto que contenga toda la informacion del mensaje
       const messageData = {
-        room: room,
+        room,
         author: username,
         message: currentMessage,
         time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes()
       }
 
       await socket.emit('send_message', messageData)
+      // Add our messages to the list //
+      setReceiveMessage((list) => [...list, messageData])
     }
     setCurrentMessage('')
   }
@@ -31,11 +36,32 @@ export const Chat = ({ socket, username, room }) => {
       <header className='chat-main-header'>
         <p>Live chat</p>
       </header>
-      <body className='chat-main-body' />
-      <footer className='chat-main-footer'>
-        <input type='text' placeholder='Say something....' onChange={handleChange} value={currentMessage} />
+      <div className='chat-main-body'>
+        {
+          receiveMessage.map((messageContent) => {
+            return (
+              <div className='message' id={username === messageContent.author ? 'you' : 'other'}>
+                <div>
+                  <div className='message-header'>
+                    <p>{messageContent.message}</p>
+                  </div>
+                  <div className='message-meta'>
+                    <p>{messageContent.time}</p>
+                    <p>{messageContent.author}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+      <div className='chat-main-footer'>
+        <input
+          type='text' placeholder='Say something....' onChange={handleChange} value={currentMessage}
+          onKeyPress={e => { e.key === 'Enter' && sendMessage() }}
+        />
         <button onClick={sendMessage} className='chat-main-footer-button'><BsFillSendFill /></button>
-      </footer>
+      </div>
     </main>
   )
 }
