@@ -2,7 +2,6 @@
     height: 450px;
     display: flex;
     flex-direction: column;
-    
 }
 .chat-main-header {
     padding-top: 10px;
@@ -10,15 +9,21 @@
     height: 30px;
     background: #212F3D;
     color: #fff;
+    border-bottom: 2px solid #641E16;
+}
+.chat-main-prueba {
+   height: 350px;
+   position: relative;
 }
 .chat-main-body {
     padding: 10px;
-    background: #1B2631;
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 10px;
-    
+}
+.chat-main-prueba::-webkit-scrollbar {
+    width: 100px;
 }
 .chat-main-footer {
     display: flex;
@@ -31,11 +36,11 @@
     height: 33px;
     border-radius: 0px;
 }
-.chat-main-body-scroll {
-    display: flex;
-    flex-grow: 1;
-    overflow-y:scroll ;
-    overflow-x: hidden;
+.chat-main-scroll {
+    height: 100%;
+    width: 100%;
+    background: #1B2631;
+    overflow-y: hidden;
 }
 
 #you.message {
@@ -64,11 +69,14 @@
 }
 
 #you.message .message-meta {
+    font-size: 15px;
     color: #fff;
-    align-self: end;
     display: flex;
+    width: fit-content;
+    align-self: end;
     gap: 2px;
 }
+
 #other.message .message-header {
     padding: 5px;
     border-radius: 5px;
@@ -78,6 +86,7 @@
     max-width: 200px;
 }
 #other.message .message-meta {
+    font-size: 15px;
     color: #fff;
     align-self: start;
     display: flex;

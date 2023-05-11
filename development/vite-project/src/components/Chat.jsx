@@ -36,24 +36,28 @@ export const Chat = ({ socket, username, room }) => {
       <header className='chat-main-header'>
         <p>Live chat</p>
       </header>
-      <div className='chat-main-body'>
-        {
+      <div className='chat-main-prueba'>
+        <ScrollToBottom className='chat-main-scroll'>
+          <div className='chat-main-body'>
+            {
           receiveMessage.map((messageContent) => {
             return (
               <div className='message' id={username === messageContent.author ? 'you' : 'other'}>
-                <div>
-                  <div className='message-header'>
-                    <p>{messageContent.message}</p>
-                  </div>
-                  <div className='message-meta'>
-                    <p>{messageContent.time}</p>
-                    <p>{messageContent.author}</p>
-                  </div>
+
+                <div className='message-header'>
+                  <p>{messageContent.message}</p>
                 </div>
+                <div className='message-meta'>
+                  <p>{messageContent.time}</p>
+                  <p>{messageContent.author}</p>
+                </div>
+
               </div>
             )
           })
         }
+          </div>
+        </ScrollToBottom>
       </div>
       <div className='chat-main-footer'>
         <input
