@@ -43,8 +43,9 @@ io.on('connection', (socket) => {
     console.log(data.room)
     socket.to(data.room).emit('receive_message', data)
   })
-  socket.on('disconnect', () => {
+  socket.on('disconnected', (data) => {
     console.log('User disconnected', socket.id)
+    socket.leave(data)
   })
 })
 

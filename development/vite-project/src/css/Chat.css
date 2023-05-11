@@ -22,9 +22,6 @@
     flex-grow: 1;
     gap: 10px;
 }
-.chat-main-prueba::-webkit-scrollbar {
-    width: 100px;
-}
 .chat-main-footer {
     display: flex;
 }
@@ -36,13 +33,12 @@
     height: 33px;
     border-radius: 0px;
 }
-.chat-main-scroll {
+.chat-main-scroll{
     height: 100%;
     width: 100%;
     background: #1B2631;
     overflow-y: hidden;
 }
-
 #you.message {
     align-self: end;
     height: fit-content;

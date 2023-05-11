@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react'
 import '../css/Chat.css'
 import { BsFillSendFill } from 'react-icons/bs'
 import ScrollToBottom from 'react-scroll-to-bottom'
+import { HiOutlineReply } from 'react-icons/hi'
 
-export const Chat = ({ socket, username, room }) => {
+export const Chat = ({ socket, username, room, clear }) => {
   const [currentMessage, setCurrentMessage] = useState('')
   const [receiveMessage, setReceiveMessage] = useState([])
   const handleChange = e => {
@@ -31,6 +32,11 @@ export const Chat = ({ socket, username, room }) => {
       setReceiveMessage((list) => [...list, data])
     })
   }, [socket])
+
+  useEffect(() => {
+    // Cada vez que salga de la sala reiniciaremos los mensajes
+    setReceiveMessage([])
+  }, [clear])
   return (
     <main className='chat-main'>
       <header className='chat-main-header'>

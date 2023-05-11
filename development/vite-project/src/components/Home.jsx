@@ -17,6 +17,7 @@ export const Home = () => {
   const [chatLoginAppeared, setChatLoginAppeared] = useState(false)
   const [chatAppeared, setChatAppeared] = useState(false)
   const [click, setClick] = useState(false)
+  const [clearMessages, setClearMessages] = useState(true)
   const classNameChat = chatAppeared ? 'home-chat' : 'home-chat invisible'
 
   const handleClick = () => {
@@ -39,6 +40,7 @@ export const Home = () => {
     }
   }
   const goOutChat = () => {
+    setClearMessages(!clearMessages)
     setChatAppeared(false)
     setChatLoginAppeared(true)
   }
@@ -61,7 +63,7 @@ export const Home = () => {
           </aside>}
         <aside className={classNameChat}>
           <button onClick={goOutChat} className='home-chat-button'><HiOutlineReply /></button>
-          <Chat socket={SOCKET} username={chatUsername} room={room} />
+          <Chat socket={SOCKET} username={chatUsername} room={room} clear={clearMessages} />
         </aside>
       </div>
       <div className='home-aside'>
