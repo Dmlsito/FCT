@@ -33,16 +33,27 @@ export const Home = () => {
   }
   console.log(room)
   const handleClickChat = e => {
-    setChatLoginAppeared(!chatLoginAppeared)
-    setChatAppeared(!chatAppeared)
-    if (chatUsername !== null && room !== null) {
+    if (chatUsername !== '' && room !== '') {
       SOCKET.emit('join_room', room)
+      setChatLoginAppeared(!chatLoginAppeared)
+      setChatAppeared(!chatAppeared)
+      const objectChatInfo = { chatUsername: chatUsername, chatRoomName: room }
+      fetch('http://localhost:8080/main-page', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(objectChatInfo)
+    })
     }
+
   }
   const goOutChat = () => {
     setClearMessages(!clearMessages)
     setChatAppeared(false)
     setChatLoginAppeared(true)
+    setChatUsername('')
+    setRoom('')
   }
   const handleChangeRoom = e => setRoom(e.target.value)
   const handleChangeUser = e => setChatUsername(e.target.value)

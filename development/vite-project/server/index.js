@@ -70,13 +70,21 @@ app.post('/login', async (request, response) => {
 app.get('/main-page', async (request, response) => {
   console.log('Estan accediendo a los datos de las maquinas')
   const [rows] = await pool.query('SELECT * FROM machine_state').then()
-
   if (rows.length <= 0) {
     console.log('No se han podido mandar los datos')
     response.status(404).end()
   } else {
     response.json(rows).status(200)
   }
+})
+app.get('/main-page?:name', (request, response) => {
+  console.log(request.params.name)
+})
+app.post('/main-page', async (request, response) => {
+  // const chatUsername = request.body.chatUsername //
+  const roomId = request.body.chatRoomName
+  const res = await pool.query('INSERT INTO Chat (Room_id) VALUES (?)', [roomId])
+  response.json(res).status(200)
 })
 
 // Datos para el chat //
