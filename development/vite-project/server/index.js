@@ -12,7 +12,7 @@ const io = new Server(server, {
     methods: ['GET', 'POST']
   }
 })
-
+let usernamePrincipal
 // Desactivamos los cors con esto //
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
@@ -21,7 +21,6 @@ app.use((req, res, next) => {
   res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE')
   next()
 })
-
 app.use(express.json())
 
 server.listen(8080, () => {
@@ -57,6 +56,7 @@ app.post('/login', async (request, response) => {
 
   const [rows] = await pool.query('SELECT * FROM Users WHERE Username = ? and Password = ? ', [username, password]).then()
   if (rows.length <= 0) {
+    usernamePrincipal = username
     console.log('Este usuairo ha intentado logearse y no tiene usuario ni contrasena')
     response.json({ error: true }).status(404).end()
   } else {
@@ -69,16 +69,25 @@ app.post('/login', async (request, response) => {
 
 app.get('/main-page', async (request, response) => {
   console.log('Estan accediendo a los datos de las maquinas')
+  // console.log(usernamePassword, usernamePrincipal) //
   const [rows] = await pool.query('SELECT * FROM machine_state').then()
+  const [rows2] = await pool.query('SELECT * FROM Users_roles INNER JOIN Users ON Users_roles.Id_Usuario = Users.Id')
+  console.log(rows2)
+  let roles
+  rows2.forEach(role => {
+    if (role.Username === usernamePrincipal) roles = role.Role
+  })
+  console.log(roles)
+  console.log({ rows, roles })
   if (rows.length <= 0) {
     console.log('No se han podido mandar los datos')
     response.status(404).end()
   } else {
-    response.json(rows).status(200)
+    response.json({ rows, roles }).status(200)
   }
 })
-app.get('/main-page?:name', (request, response) => {
-  console.log(request.params.name)
+app.get('/main-page', (request, response) => {
+
 })
 app.post('/main-page', async (request, response) => {
   // const chatUsername = request.body.chatUsername //

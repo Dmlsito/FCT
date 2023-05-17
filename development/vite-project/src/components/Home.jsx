@@ -37,16 +37,15 @@ export const Home = () => {
       SOCKET.emit('join_room', room)
       setChatLoginAppeared(!chatLoginAppeared)
       setChatAppeared(!chatAppeared)
-      const objectChatInfo = { chatUsername: chatUsername, chatRoomName: room }
+      const objectChatInfo = { chatUsername, chatRoomName: room }
       fetch('http://localhost:8080/main-page', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(objectChatInfo)
-    })
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(objectChatInfo)
+      })
     }
-
   }
   const goOutChat = () => {
     setClearMessages(!clearMessages)

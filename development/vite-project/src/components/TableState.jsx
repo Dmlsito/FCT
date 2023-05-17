@@ -3,7 +3,7 @@ import { CardState } from './CardState'
 import { useStateMachine } from '../hooks/getStateMachine'
 import { useMemo } from 'react'
 export const TableState = ({ indexStart, handleClick, click }) => {
-  const stateMachine = useStateMachine({ indexStart })
+  const { stateMachine } = useStateMachine({ indexStart })
   // Solo queremos que se muestren los siguientes datos cuando le demos click
   const showInfoState = useMemo(() => {
     return stateMachine.splice(indexStart, 6)
