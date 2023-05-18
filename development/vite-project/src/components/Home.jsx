@@ -6,6 +6,7 @@ import { FaRegCommentDots } from 'react-icons/fa'
 import { Chat } from './Chat'
 import { HiOutlineReply } from 'react-icons/hi'
 import { io } from 'socket.io-client'
+import { useStateMachine } from '../hooks/getStateMachine'
 
 // Conectamos el front con el back, como hicimos con el back //
 const SOCKET = io.connect('http://localhost:8080')
@@ -19,6 +20,7 @@ export const Home = () => {
   const [click, setClick] = useState(false)
   const [clearMessages, setClearMessages] = useState(true)
   const classNameChat = chatAppeared ? 'home-chat' : 'home-chat invisible'
+  const { role } = useStateMachine({ indexStart })
 
   const handleClick = () => {
     setClick(!click)
@@ -77,7 +79,10 @@ export const Home = () => {
         </aside>
       </div>
       <div className='home-aside'>
-        <button onClick={chat}><FaRegCommentDots className='home-aside-icon' /></button>
+        <p className='home-aside-p'>{`Accessing as: ${role}`}</p>
+        <div className='home-aside-button'>
+          <button onClick={chat}><FaRegCommentDots className='home-aside-icon' /></button>
+        </div>
       </div>
     </main>
   )

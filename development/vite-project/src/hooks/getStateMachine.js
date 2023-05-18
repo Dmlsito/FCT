@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const useStateMachine = ({ indexStart }) => {
-  const [ role, setRole ] = useState('')
+  const [role, setRole] = useState('')
   const [stateMachine, setStateMachine] = useState([''])
 
   useEffect(() => {
