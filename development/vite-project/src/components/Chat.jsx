@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import '../css/Chat.css'
 import { BsFillSendFill } from 'react-icons/bs'
 import ScrollToBottom from 'react-scroll-to-bottom'
-import { HiOutlineReply } from 'react-icons/hi'
 
 export const Chat = ({ socket, username, room, clear }) => {
   const [currentMessage, setCurrentMessage] = useState('')

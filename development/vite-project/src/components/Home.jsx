@@ -14,7 +14,7 @@ const SOCKET = io.connect('http://localhost:8080')
 export const Home = () => {
   const [indexStart, setIndexStart] = useState(0)
   const [chatUsername, setChatUsername] = useState('')
-  const [room, setRoom] = useState('')
+  const [room, setRoom] = useState()
   const [chatLoginAppeared, setChatLoginAppeared] = useState(false)
   const [chatAppeared, setChatAppeared] = useState(false)
   const [click, setClick] = useState(false)
@@ -28,14 +28,12 @@ export const Home = () => {
       setIndexStart(indexStart + 6)
     }
   }
-
   const chat = () => {
     if (chatAppeared) return
     setChatLoginAppeared(!chatLoginAppeared)
   }
-  console.log(room)
   const handleClickChat = e => {
-    if (chatUsername !== '' && room !== '') {
+    if (chatUsername !== '' && room !== '' && Number.isInteger(parseInt(room))) {
       SOCKET.emit('join_room', room)
       setChatLoginAppeared(!chatLoginAppeared)
       setChatAppeared(!chatAppeared)
@@ -47,6 +45,8 @@ export const Home = () => {
         },
         body: JSON.stringify(objectChatInfo)
       })
+    } else {
+      console.log('Debes introducir un numero')
     }
   }
   const goOutChat = () => {

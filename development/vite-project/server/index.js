@@ -93,6 +93,15 @@ app.post('/main-page', async (request, response) => {
   // const chatUsername = request.body.chatUsername //
   const roomId = request.body.chatRoomName
   const res = await pool.query('INSERT INTO Chat (Room_id) VALUES (?)', [roomId])
+  const [res2] = await pool.query('SELECT * FROM Users WHERE Username = ?', [usernamePrincipal])
+  console.log(res2)
+  let id
+  res2.forEach(user => {
+    id = user.Id
+  })
+  console.log(id)
+
+  pool.query('INSERT INTO Users_chat (Id_Usuario, Id_room) VALUES (?, ?)', [id, roomId])
   response.json(res).status(200)
 })
 
