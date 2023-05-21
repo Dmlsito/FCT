@@ -38,8 +38,7 @@ io.on('connection', (socket) => {
 
   socket.on('send_message', (data) => {
     // Cuando se envie un mensaje el socket va a enviar el mensaje de vuelta, pero le tenemos que
-    // especificar el id de la sala
-    console.log(data.room)
+    // especificar el id de la sala //
     socket.to(data.room).emit('receive_message', data)
   })
   socket.on('disconnected', (data) => {
@@ -72,13 +71,10 @@ app.get('/main-page', async (request, response) => {
   // console.log(usernamePassword, usernamePrincipal) //
   const [rows] = await pool.query('SELECT * FROM machine_state').then()
   const [rows2] = await pool.query('SELECT * FROM Users_roles INNER JOIN Users ON Users_roles.Id_Usuario = Users.Id')
-  console.log(rows2)
   let roles
   rows2.forEach(role => {
     if (role.Username === usernamePrincipal) roles = role.Role
   })
-  console.log(roles)
-  console.log({ rows, roles })
   if (rows.length <= 0) {
     console.log('No se han podido mandar los datos')
     response.status(404).end()
@@ -86,23 +82,23 @@ app.get('/main-page', async (request, response) => {
     response.json({ rows, roles }).status(200)
   }
 })
-app.get('/main-page', (request, response) => {
 
-})
 app.post('/main-page', async (request, response) => {
   // const chatUsername = request.body.chatUsername //
   const roomId = request.body.chatRoomName
   const res = await pool.query('INSERT INTO Chat (Room_id) VALUES (?)', [roomId])
   const [res2] = await pool.query('SELECT * FROM Users WHERE Username = ?', [usernamePrincipal])
-  console.log(res2)
   let id
   res2.forEach(user => {
     id = user.Id
   })
-  console.log(id)
 
-  pool.query('INSERT INTO Users_chat (Id_Usuario, Id_room) VALUES (?, ?)', [id, roomId])
-  response.json(res).status(200)
+  const [res3] = await pool.query('INSERT INTO Users_chat (Id_Usuario, Id_room) VALUES (?, ?)', [id, roomId])
+  if (res3) {
+    response.json(res).status(200)
+  } else {
+    response.json({ error: 'Ha ocurrido un error' }).status(404).end()
+  }
 })
 
 // Datos para el chat //
