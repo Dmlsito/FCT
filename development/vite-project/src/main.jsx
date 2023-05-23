@@ -6,6 +6,7 @@ import './css/App.css'
 import './css/index.css'
 import { BrowserRouter } from 'react-router-dom'
 
+// Punto de inicio de la aplicacio, AQUI SE CARGA EL COMPONENTE APP//
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <App />

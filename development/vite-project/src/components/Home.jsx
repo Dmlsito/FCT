@@ -21,7 +21,7 @@ export const Home = () => {
   const [clearMessages, setClearMessages] = useState(true)
   const classNameChat = chatAppeared ? 'home-chat' : 'home-chat invisible'
   const { role } = useStateMachine({ indexStart })
-
+  // Linea 24 - 30
   const handleClick = () => {
     setClick(!click)
     if (indexStart === 12) { setIndexStart(0) } else {
@@ -58,6 +58,7 @@ export const Home = () => {
   }
   const handleChangeRoom = e => setRoom(e.target.value)
   const handleChangeUser = e => setChatUsername(e.target.value)
+  // LO QUE ESTA ENTRE PARANTESIS DESPUES DEL RETURN ES LO GRAFICO //
   return (
     <main className='home'>
       <div className='home-main'>

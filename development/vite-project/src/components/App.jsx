@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Entry } from './Entry'
 
 import { Header } from './Header'
+// TODO LO QUE ESTE FUERA DE <Routes> va a estar siempre en cualquier salto de pestana //
 const App = () => {
   return (
     <div className='App'>

@@ -11,9 +11,12 @@ export const Login = () => {
   const getUsername = e => setUsername(e.target.value)
 
   const getPassword = e => setPassword(e.target.value)
-
+  // Con esta funcion validamos que el usuairo y contrasena escritos sean correctos //
   const validation = async ({ username, password }) => {
+    // Creo un objeto que tenga dos propiedades, para poder mandarle la informacion en formato JSON //
     const objectUser = { name: username, password }
+    // AQUI CONECTAS CON EL SERVIDOR
+    // Te mando el json con el nombre y la contrasena y accedo a tu respuesta //
     const { error } = await fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {

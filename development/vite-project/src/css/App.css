@@ -36,7 +36,7 @@
 .App-head-clock{
   background: none;
 }
-/*
+
 @media screen and (max-width: 1500px){
   .App-head-title{
     font-size: 25px;
@@ -55,16 +55,17 @@
 @media screen and (max-width: 500px){
   
   .App-head-list{
-    text-align: center;
-    width: 30px;
-    font-size: 10px;
+    width: 100px;
+    font-size: 15px;
+    margin-right: 50px;
   }
   .App-head-title{
     width: 200px;
-    font-size: 10px;
+    font-size: 20px;
   }
   .App-head{
-    gap: 5px;
+    justify-content: space-evenly;
+    gap: 0px;
   }
+  
 }
-*/

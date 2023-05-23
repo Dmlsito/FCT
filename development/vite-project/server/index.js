@@ -52,7 +52,6 @@ app.post('/login', async (request, response) => {
   // Valores que ha introducido el usuario //
   const username = request.body.name
   const password = request.body.password
-
   const [rows] = await pool.query('SELECT * FROM Users WHERE Username = ? and Password = ? ', [username, password]).then()
   if (rows.length <= 0) {
     usernamePrincipal = username
@@ -65,10 +64,11 @@ app.post('/login', async (request, response) => {
     response.json({ error: false })
   }
 })
-
+// LINEA 68-86 //
 app.get('/main-page', async (request, response) => {
   console.log('Estan accediendo a los datos de las maquinas')
   // console.log(usernamePassword, usernamePrincipal) //
+  // EN ESTA LINEA, EN LA 72 GUARDA LA INFORMACION DE LA BBDD EN LA VARIABLE ROWS
   const [rows] = await pool.query('SELECT * FROM machine_state').then()
   const [rows2] = await pool.query('SELECT * FROM Users_roles INNER JOIN Users ON Users_roles.Id_Usuario = Users.Id')
   let roles
