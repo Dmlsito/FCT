@@ -3,7 +3,7 @@ import express from 'express'
 import pool from './db.js'
 import http from 'http'
 import { Server } from 'socket.io'
-
+// Hola q tal
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server, {
