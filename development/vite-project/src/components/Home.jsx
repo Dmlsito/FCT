@@ -7,7 +7,7 @@ import { Chat } from './Chat'
 import { HiOutlineReply } from 'react-icons/hi'
 import { io } from 'socket.io-client'
 import { useStateMachine } from '../hooks/getStateMachine'
-
+import { useUsers } from '../hooks/getUsers'
 // Conectamos el front con el back, como hicimos con el back //
 const SOCKET = io.connect('http://localhost:8080')
 
@@ -20,7 +20,11 @@ export const Home = () => {
   const [click, setClick] = useState(false)
   const [clearMessages, setClearMessages] = useState(true)
   const classNameChat = chatAppeared ? 'home-chat' : 'home-chat invisible'
+  const [chatAccess, setChatAccess] = useState(null)
+  const [chatFree, setChatFree] = useState(null)
   const { role } = useStateMachine({ indexStart })
+  const { setUser, user } = useUsers()
+  console.log(user)
   // Linea 24 - 30
   const handleClick = () => {
     setClick(!click)
@@ -32,24 +36,53 @@ export const Home = () => {
     if (chatAppeared) return
     setChatLoginAppeared(!chatLoginAppeared)
   }
-  const handleClickChat = e => {
+  const handleClickChatSelectRoom = async () => {
     if (chatUsername !== '' && room !== '' && Number.isInteger(parseInt(room))) {
-      SOCKET.emit('join_room', room)
-      setChatLoginAppeared(!chatLoginAppeared)
-      setChatAppeared(!chatAppeared)
-      const objectChatInfo = { chatUsername, chatRoomName: room }
-      fetch('http://localhost:8080/main-page', {
+      const { message } = await fetch(`http://localhost:8080/main-page/${room}`)
+        .then(res => res.json())
+      console.log(message)
+      if (message === 'used') {
+        SOCKET.emit('join_room', room)
+        setChatLoginAppeared(!chatLoginAppeared)
+        setChatAppeared(!chatAppeared)
+        setChatAccess(true)
+      } else {
+        setChatAccess(false)
+      }
+    }
+  }
+
+  const handleClickChatCreateRoom = async e => {
+    if (chatUsername !== '' && room !== '' && Number.isInteger(parseInt(room))) {
+      const { message } = await fetch(`http://localhost:8080/main-page/${room}/${chatUsername}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(objectChatInfo)
-      })
+        }
+      }).then(res => res.json())
+
+      if (message === 'chatId used') {
+        setChatFree(false)
+      } else {
+        SOCKET.emit('join_room', room)
+        setChatLoginAppeared(!chatLoginAppeared)
+        setChatAppeared(!chatAppeared)
+        setChatFree(true)
+      }
     } else {
       console.log('Debes introducir un numero')
     }
   }
   const goOutChat = () => {
+    fetch(`http://localhost:8080/main-page/${room}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json()).then(res => console.log(res))
+    SOCKET.emit('disconnected', room)
+    setChatAccess(null)
+    setChatFree(null)
     setClearMessages(!clearMessages)
     setChatAppeared(false)
     setChatLoginAppeared(true)
@@ -72,7 +105,10 @@ export const Home = () => {
           <aside className='home-chatLogin'>
             <input placeholder='username' name='chatUsername' value={chatUsername} onChange={handleChangeUser} />
             <input placeholder='room id' name='chatRoomName' value={room} onChange={handleChangeRoom} />
-            <button onClick={handleClickChat}>Create room</button>
+            {chatFree === false && <span>El id de sala esta ocupado</span>}
+            {chatAccess === false && <span>La sala de chat no existe</span>}
+            <button onClick={handleClickChatSelectRoom()}>Select room</button>
+            <button onClick={handleClickChatCreateRoom}>Create room</button>
           </aside>}
         <aside className={classNameChat}>
           <button onClick={goOutChat} className='home-chat-button'><HiOutlineReply /></button>

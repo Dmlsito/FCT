@@ -9,7 +9,7 @@ const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:5173',
-    methods: ['GET', 'POST']
+    methods: ['GET', 'POST', 'DELETE']
   }
 })
 let usernamePrincipal
@@ -53,6 +53,7 @@ app.post('/login', async (request, response) => {
   const username = request.body.name
   const password = request.body.password
   const [rows] = await pool.query('SELECT * FROM Users WHERE Username = ? and Password = ? ', [username, password]).then()
+
   if (rows.length <= 0) {
     usernamePrincipal = username
     console.log('Este usuairo ha intentado logearse y no tiene usuario ni contrasena')
@@ -65,7 +66,7 @@ app.post('/login', async (request, response) => {
   }
 })
 // LINEA 68-86 //
-app.get('/main-page', async (request, response) => {
+app.get('/main-page/', async (request, response) => {
   console.log('Estan accediendo a los datos de las maquinas')
   // console.log(usernamePassword, usernamePrincipal) //
   // EN ESTA LINEA, EN LA 72 GUARDA LA INFORMACION DE LA BBDD EN LA VARIABLE ROWS
@@ -83,24 +84,39 @@ app.get('/main-page', async (request, response) => {
   }
 })
 
-app.post('/main-page', async (request, response) => {
-  // const chatUsername = request.body.chatUsername //
-  const roomId = request.body.chatRoomName
-  const res = await pool.query('INSERT INTO Chat (Room_id) VALUES (?)', [roomId])
-  const [res2] = await pool.query('SELECT * FROM Users WHERE Username = ?', [usernamePrincipal])
-  let id
-  res2.forEach(user => {
-    id = user.Id
-  })
-
-  const [res3] = await pool.query('INSERT INTO Users_chat (Id_Usuario, Id_room) VALUES (?, ?)', [id, roomId])
-  if (res3) {
-    response.json(res).status(200)
+app.get('/main-page/:room', async (request, response) => {
+  console.log(request.params.room)
+  const [res] = await pool.query(`SELECT * FROM Chat WHERE Room_id = ${request.params.room}`).then()
+  if (res.length <= 0) {
+    response.json({ message: 'free' }).status(200).end()
   } else {
-    response.json({ error: 'Ha ocurrido un error' }).status(404).end()
+    response.json({ message: 'used' }).status(200).end()
   }
 })
 
+app.post('/main-page/:room/:username', async (request, response) => {
+  const [res] = await pool.query(`SELECT * FROM Chat WHERE Room_id = ${request.params.room}`).then()
+  if (res.length <= 0) {
+    pool.query('INSERT INTO Chat (Room_id) VALUES (?)', [request.params.room])
+    const [res2] = await pool.query('SELECT * FROM Users WHERE Username = ?', [request.params.username])
+    let id
+    res2.forEach(user => {
+      id = user.Id
+    })
+    console.log(id)
+    pool.query('INSERT INTO Users_chat (Id_Usuario, Id_room) VALUES (?, ?)', [id, request.params.room])
+    response.json({ message: 'chatId free' }).status(200).end()
+  } else {
+    response.json({ message: 'chatId used' }).status(200).end()
+  }
+})
+
+app.delete('/main-page/:room', async (request, response) => {
+  console.log('chat borrado')
+  pool.query(`DELETE  FROM Users_chat WHERE Id_room = ${request.params.room}`)
+  pool.query(`DELETE  FROM Chat WHERE Room_id = ${request.params.room}`)
+  response.json({ message: 'chat deleted' })
+})
 // Datos para el chat //
 // Project ID -> ea5ad5a0-17a7-491d-a0e9-5af3c163e437 //
 // Private Key -> 91194d0c-e20d-4173-9ee9-4a994a058e60 //

@@ -1,14 +1,17 @@
 import '../css/Login.css'
 import { useState, useEffect } from 'react'
 import { Form } from './Form'
+import { useUsers } from '../hooks/getUsers'
 
 export const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState(true)
   const [showErrors, setShowErros] = useState(null)
-
-  const getUsername = e => setUsername(e.target.value)
+  const { setUser, user } = useUsers()
+  const getUsername = e => {
+    setUsername(e.target.value)
+  }
 
   const getPassword = e => setPassword(e.target.value)
   // Con esta funcion validamos que el usuairo y contrasena escritos sean correctos //
@@ -42,7 +45,6 @@ export const Login = () => {
   useEffect(() => {
     validation({ username, password })
   }, [username, password])
-
   return (
     <Form
       handleSubmit={handleSubmit} getPassword={getPassword}

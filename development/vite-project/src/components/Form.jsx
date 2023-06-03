@@ -2,7 +2,7 @@ export const Form = ({ handleSubmit, getPassword, getUsername, username, passwor
   return (
     <main className='main'>
       <div className='main-log'>
-        <h2>Wellcome</h2>
+        <h2>Welcome!!</h2>
         <form className='log-form' action='/main-page' onSubmit={handleSubmit}>
           <input placeholder='Username' onChange={getUsername} value={username} name='name' />
           <input placeholder='Password' onChange={getPassword} value={password} name='password' />

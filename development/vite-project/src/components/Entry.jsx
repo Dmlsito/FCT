@@ -11,7 +11,7 @@ export const Entry = () => {
           fontSize: '80px',
           fontWeight: 'bold'
         }}
-      ><h1>WELLCOME</h1>
+      ><h1>WELCOM@!!</h1>
       </Link>
     </main>
   )

@@ -5,10 +5,14 @@ import App from './components/App.jsx'
 import './css/App.css'
 import './css/index.css'
 import { BrowserRouter } from 'react-router-dom'
-
+import { UsersProvider } from './context/user.jsx'
 // Punto de inicio de la aplicacio, AQUI SE CARGA EL COMPONENTE APP//
 ReactDOM.createRoot(document.getElementById('root')).render(
+
   <BrowserRouter>
-    <App />
+    <UsersProvider>
+      <App />
+    </UsersProvider>
   </BrowserRouter>
+
 )
