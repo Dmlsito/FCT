@@ -107,7 +107,7 @@ export const Home = () => {
             <input placeholder='room id' name='chatRoomName' value={room} onChange={handleChangeRoom} />
             {chatFree === false && <span>El id de sala esta ocupado</span>}
             {chatAccess === false && <span>La sala de chat no existe</span>}
-            <button onClick={handleClickChatSelectRoom()}>Select room</button>
+            <button onClick={handleClickChatSelectRoom}>Select room</button>
             <button onClick={handleClickChatCreateRoom}>Create room</button>
           </aside>}
         <aside className={classNameChat}>

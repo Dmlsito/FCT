@@ -34,24 +34,19 @@ sub.on('message', (topic, message) => {
   //   DB.query(`UPDATE machine_state SET state = ?, LastTimeUsed = ? WHERE id = 17`, [1, final])
   // } else {
   //   DB.query(`UPDATE machine_state SET state = ${0} WHERE id = 17`)
-
   if (pressureNumber >= 10) {
     setTimeout(() => {
-      if(pressureNumber >= 20){
+      if (pressureNumber >= 20) {
         console.log('Han pasado los 10 segundos y sigue habiendo presion')
         DB.query(`UPDATE machine_state SET state = ${1} WHERE id = 17`)
       }
     }, 6000)
-    
-  } 
-  else {
+  } else {
     setTimeout(() => {
-      if(pressureNumber < 20){
-        
+      if (pressureNumber < 20) {
         DB.query(`UPDATE machine_state SET state = ${0} WHERE id = 17`)
       }
     }, 15000)
-
   }
 })
 // 19: 31
